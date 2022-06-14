@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Voting {
+contract Voting is Ownable{
 
     uint public winningProposalId;
     address owner;
@@ -22,6 +22,7 @@ contract Voting {
     struct Proposal {
         string description;
         uint voteCount;
+        address author; 
     }
 
     // Les status du vote
@@ -40,24 +41,19 @@ contract Voting {
 
     // All events
     event VoterRegistered(address voterAddress); 
+    event VoterUnregistered(address voterAddress);
     event WorkflowStatusChange(WorkflowStatus previousStatus, WorkflowStatus newStatus);
     event ProposalRegistered(uint proposalId);
+    event ProposalUnregistered(uint proposalId);
     event Voted (address voter, uint proposalId);
 
 
     constructor(){
         owner = msg.sender;
-        proposals.push(Proposal("blanc", 0));
+        proposals.push(Proposal("vote blanc", 0, address(0)));
          voterState[msg.sender].isRegistered = true;
     }
 
-    modifier onlyOwner{
-        require(msg.sender == owner);
-        _;
-    }
-
-
-//Fonctions indifferentes aux etapes:
 
     //Changer l'etat du vote et le finir
     function setStatus() public onlyOwner{
@@ -74,19 +70,32 @@ contract Voting {
     // 1ere etape: whitelist un utilisateur
     function whitelist(address _address) public onlyOwner{
         voterState[_address].isRegistered = true;
-        emit VoterRegistered(msg.sender);
+        emit VoterRegistered(_address);
     }
 
-    // Seconde etape: register le vote
+    function unWhitelist(address _address) public onlyOwner{
+        voterState[_address].isRegistered = false;
+        emit VoterUnregistered(_address);
+    }
+
+
+    // 2nd etape: register le vote
     function register(string memory _info) public {
         require(voterState[msg.sender].isRegistered == true, "Vous n'etes pas enregistre");
         require(status == WorkflowStatus.ProposalsRegistrationStarted, "vous ne pouvez pas enregistrer de vote");
         require(voterState[msg.sender].hasProposed == false, "Vous avez deja propose un vote");
-        proposals.push(Proposal(_info, 0));
+        proposals.push(Proposal(_info, 0, msg.sender));
         voterState[msg.sender].hasProposed = true;
     }
 
-    // 3 etape: voter
+    function unRegister(uint _Id) public onlyOwner{
+        require(voterState[msg.sender].isRegistered == true, "Vous n'etes pas enregistre");
+        require(status == WorkflowStatus.ProposalsRegistrationStarted, "vous ne pouvez pas enregistrer de vote");
+        delete proposals[_Id];
+    }
+
+
+    // 3e etape: voter
     function voter(uint _vote) public{
         require(voterState[msg.sender].isRegistered == true, "Vous n'etes pas enregistre");
         require(status == WorkflowStatus.VotingSessionStarted, "la session de vote n'a pas demarree");
@@ -111,8 +120,9 @@ contract Voting {
 
     //fonction pour savoir la proposition accepté
     function getWinner() public view returns(string memory){
-        return string(abi.encodePacked(proposals[winningProposalId].description, " confirme avec",proposals[winningProposalId].voteCount," voix"));
+        require(status == WorkflowStatus.VotesTallied, "Tallied not finished"); 
+        return string("vote de", abi.encodePacked(proposals[winningProposalId].author, abi.encodePacked(proposals[winningProposalId].description, " confirme avec",proposals[winningProposalId].voteCount," voix"));
     }
 
 
-}
+} 
