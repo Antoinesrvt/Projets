@@ -5,18 +5,18 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Voting is Ownable{
 
-    uint public winningProposalId;
+    uint16 public winningProposalId;
+    uint16 public sessionId;
     address owner;
-    mapping(address => Voter) voterState;
-    Proposal[] public proposals;
 
     //Etat du voteur (j'ai rajouté un bool pour qu'un voteur puisse proposer qu'une seule variable au vote)
     struct Voter {
         bool isRegistered;
         bool hasProposed;
         bool hasVoted;
-        uint votedProposalId;
+        uint votedProposalId; 
     }
+    mapping(address => Voter) voterState;
 
     // Propositions de vote
     struct Proposal {
@@ -24,6 +24,15 @@ contract Voting is Ownable{
         uint voteCount;
         address author; 
     }
+    Proposal[] public proposals;
+
+    // Pour faire plusieurs sessions de vote
+    struct Session { 
+        string winningProposalName;
+        uint16 nbVotes;
+        uint16 totalVotes;
+    }
+    Session[] public sessions;
 
     // Les status du vote
     enum WorkflowStatus{
@@ -46,28 +55,27 @@ contract Voting is Ownable{
     event ProposalRegistered(uint proposalId);
     event ProposalUnregistered(uint proposalId);
     event Voted (address voter, uint proposalId);
+    event SessionRestart(uint sessionId);
 
 
     constructor(){
         owner = msg.sender;
+        sessionId=0;
+        sessions.push(Session('None',0,0));
         proposals.push(Proposal("vote blanc", 0, address(0)));
-         voterState[msg.sender].isRegistered = true;
+        voterState[msg.sender].isRegistered = true;
+        status = WorkflowStatus.RegisteringVoters;
     }
 
 
-    //Changer l'etat du vote et le finir
+    //Changer l'etat du vote
     function setStatus() public onlyOwner{
         emit WorkflowStatusChange( status, WorkflowStatus(uint(status) + 1));
         status = WorkflowStatus(uint(status) + 1);
-        
-        if(status == WorkflowStatus.VotingSessionEnded){
-            winningProposalId = reveal();
-            status = WorkflowStatus.VotesTallied;
-        }
     }
 
 
-    // 1ere etape: whitelist un utilisateur
+    // 1ere etape: whitelist un utilisateur 
     function whitelist(address _address) public onlyOwner{
         voterState[_address].isRegistered = true;
         emit VoterRegistered(_address);
@@ -108,21 +116,39 @@ contract Voting is Ownable{
     }
 
 
+//Fin du vote
+
+     function votesTallied() external onlyOwner {
+        require(status == WorkflowStatus.VotingSessionEnded, "Session is still ongoing");
+        
+        (uint16 win, uint16 voteWin, uint16 total) = reveal();
+        winningProposalId = win;
+        sessions[sessionId].winningProposalName = proposals[win].description;
+        sessions[sessionId].nbVotes = voteWin;
+        sessions[sessionId].totalVotes = total;       
+
+        status = WorkflowStatus.VotesTallied;
+        emit WorkflowStatusChange(WorkflowStatus.VotingSessionEnded, WorkflowStatus.VotesTallied);
+    }
+
     //Comptage des votes
-    function reveal()internal view returns(uint max){
-        for(uint i = 0; i < proposals.length; i++){
+    function reveal()internal view returns(uint16 max, uint16 totalVotes, uint16 nbVotesWinner){
+        for(uint16 i = 0; i < proposals.length; i++){
             if(proposals[i].voteCount > max){
                 max = i;
+                nbVotesWinner = uint16(proposals[i].voteCount);
             }
+            totalVotes += uint16(proposals[i].voteCount);
         }
-        return(max);
+        return(max, nbVotesWinner, totalVotes);
     }
 
     //fonction pour savoir la proposition accepté
     function getWinner() public view returns(string memory){
         require(status == WorkflowStatus.VotesTallied, "Tallied not finished"); 
-        return string("vote de", abi.encodePacked(proposals[winningProposalId].author, abi.encodePacked(proposals[winningProposalId].description, " confirme avec",proposals[winningProposalId].voteCount," voix"));
+        return string(abi.encodePacked("vote de", proposals[winningProposalId].author, proposals[winningProposalId].description, " confirme avec", proposals[winningProposalId].voteCount," voix"));
     }
 
+//
 
 } 
