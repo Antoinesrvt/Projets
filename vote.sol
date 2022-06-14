@@ -106,6 +106,7 @@ contract Voting is Ownable{
     // 3e etape: voter
     function voter(uint _vote) public{
         require(voterState[msg.sender].isRegistered == true, "Vous n'etes pas enregistre");
+        require(voterState[msg.sender].hasVoted == false, "vous avez deja vote");
         require(status == WorkflowStatus.VotingSessionStarted, "la session de vote n'a pas demarree");
         require(_vote < proposals.length, "ce vote n'existe pas");
         //incrémenter un vote grace a l'id du vote dans la liste, changer l'etat du voteur
