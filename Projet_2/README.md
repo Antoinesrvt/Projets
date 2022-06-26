@@ -4,7 +4,7 @@ Le fichier voting.test.js est le fichier test de la correction du contrat de vot
 ## Ordre du fichier
 
 ###Test des fonction d'etat (state)
-  ####J'ai testé:
+  #####J'ai testé:
   
     Si la fonction startProposalsRegistering changeait bien l'etat du workflowStatus en "ProposalsRegistrationStarted"
     L'event qui doit renvoyer l'ancien et le nouveau état de workflowStatus.
