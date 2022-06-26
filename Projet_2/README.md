@@ -47,5 +47,10 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
   
     si la fonction tallyVote fait bien gagner la proposition qui a le plus de vote
     si la fonction tallyVote fait bien gagner la premierere proposition en cas d'égalité avec une autre.
+    
+    
+ ## Pourcentage du contrat couvert: 
+ 
+ Malheureusement avec le probleme de solidity coverage cette section ne peut pas être remplie
 
 
