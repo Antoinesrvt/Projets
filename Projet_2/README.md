@@ -42,7 +42,7 @@ Le fichier voting.test.js est le fichier test de la correction du contrat de vot
 
     
     
-#Info en plus
+##Info en plus
 
 Je n'ai pas vérifié les autres fonctions d'état du workflowStatus car cela reste du copié collé du premier test. Si le premier marche, alors les autres marcheront aussi.
 
