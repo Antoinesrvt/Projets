@@ -15,8 +15,8 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
 
   ##### J'ai testé:
   
-    Si la fonction startProposalsRegistering changeait bien l'etat du workflowStatus en "ProposalsRegistrationStarted"
-    L'event qui doit renvoyer l'ancien et le nouveau état de workflowStatus.
+    si la fonction startProposalsRegistering changeait bien l'etat du workflowStatus en "ProposalsRegistrationStarted"
+    l'event qui doit renvoyer l'ancien et le nouveau état de workflowStatus.
 
 
 ### 2- Test de la fonction addVoter et des require
@@ -29,9 +29,9 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
 ### 3- Test de la fonction addProposal et des require
   #### J'ai testé:
   
-    Si la fonction addProposal ajoutait bien une proposal dans l'array proposalsArray (verifié par le getter getOneProposal).
-    Le revert si il n'y a pas de string dans l'appelation de la fonction.
-    Le revert avec un state different de ProposalsRegistrationStarted.
+    si la fonction addProposal ajoutait bien une proposal dans l'array proposalsArray (verifié par le getter getOneProposal).
+    le revert si il n'y a pas de string dans l'appelation de la fonction.
+    le revert avec un state different de ProposalsRegistrationStarted.
     
     
 ### 4- Test de la fonction setVote
@@ -45,7 +45,7 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
   Bien que tallyVote sois dans le group de fonction d'etat, celle ci a besoin d'une catégorie a part:
   #### J'ai testé:
   
-    Si la fonction tallyVote fait bien gagner la proposition qui a le plus de vote
-    Si la fonction tallyVote fait bien gagner la premierere proposition en cas d'égalité avec une autre.
+    si la fonction tallyVote fait bien gagner la proposition qui a le plus de vote
+    si la fonction tallyVote fait bien gagner la premierere proposition en cas d'égalité avec une autre.
 
 
