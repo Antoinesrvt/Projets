@@ -18,41 +18,41 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
 
   ##### J'ai testé:
   
-    si la fonction startProposalsRegistering changeait bien l'etat du workflowStatus en "ProposalsRegistrationStarted"
-    l'event WorkflowStatusChange qui doit renvoyer l'ancien et le nouveau état de workflowStatus.
+    - si la fonction startProposalsRegistering changeait bien l'etat du workflowStatus en "ProposalsRegistrationStarted"
+    - l'event WorkflowStatusChange qui doit renvoyer l'ancien et le nouveau état de workflowStatus.
 
 
 ### 2- Test de la fonction addVoter et des require
   #### J'ai véfifié:
   
-    si la fonction addVoter ajoutait bien un voter (verifié par le getter getVoter).
-    Si le revert "Already registered" marchait bien si une personne etait deja enregistrée en tant que voter.
-    l'event VoterRegistered qui doit renvoyer l'adresse du nouveau voter whitelist.
+    - si la fonction addVoter ajoutait bien un voter (verifié par le getter getVoter).
+    - Si le revert "Already registered" marchait bien si une personne etait deja enregistrée en tant que voter.
+    - l'event VoterRegistered qui doit renvoyer l'adresse du nouveau voter whitelist.
     
 
 ### 3- Test de la fonction addProposal et des require
   #### J'ai testé:
   
-    si la fonction addProposal ajoutait bien une proposal dans l'array proposalsArray (verifié par le getter getOneProposal).
-    le revert si il n'y a pas de string dans l'appelation de la fonction.
-    le revert avec un state different de ProposalsRegistrationStarted.
-    l'event ProposalRegistered qui doit renvoyer l'ID de la proposition
+    - si la fonction addProposal ajoutait bien une proposal dans l'array proposalsArray (verifié par le getter getOneProposal).
+    - le revert si il n'y a pas de string dans l'appelation de la fonction.
+    - le revert avec un state different de ProposalsRegistrationStarted.
+    - l'event ProposalRegistered qui doit renvoyer l'ID de la proposition
     
     
 ### 4- Test de la fonction setVote
   #### J'ai vérifié:
   
-    si la fonction setVote incrementait bien un vote au vote concerné.
-    si l'etat hasVoted du voter a bien été changé a true.
-    l'event Voted qui doit renvoyer l'adresse du voteur et la proposition pour laquelle il a voté.
+    - si la fonction setVote incrementait bien un vote au vote concerné.
+    - si l'etat hasVoted du voter a bien été changé a true.
+    - l'event Voted qui doit renvoyer l'adresse du voteur et la proposition pour laquelle il a voté.
  
  
 ### 5- Test de la fonction tallyVote
   ##### Bien que tallyVote sois dans le group de fonction d'etat, celle ci a besoin d'une catégorie a part:
   #### J'ai testé:
   
-    si la fonction tallyVote fait bien gagner la proposition qui a le plus de vote
-    si la fonction tallyVote fait bien gagner la premierere proposition en cas d'égalité avec une autre.
+    - si la fonction tallyVote fait bien gagner la proposition qui a le plus de vote
+    - si la fonction tallyVote fait bien gagner la premierere proposition en cas d'égalité avec une autre.
     
 
 
