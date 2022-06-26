@@ -5,7 +5,7 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
 
 ### Nombre de test effectués : 11
 ### - Pourcentage du contrat couvert: 
-Malheureusement avec le probleme de solidity coverage cette section ne peut pas être remplie
+ Malheureusement avec le probleme de solidity coverage cette section ne peut pas être remplie
 
 
 
@@ -56,4 +56,4 @@ Malheureusement avec le probleme de solidity coverage cette section ne peut pas 
     
 
 
-
+[^1]: Fait par Antoine Servant
