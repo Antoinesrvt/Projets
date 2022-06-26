@@ -1,7 +1,7 @@
 # Test du Voting
 Le fichier voting.test.js est le fichier de test de la correction du contrat de vote.
 
-## Infos
+## - Infos
 
 ### Nombre de test effectués : 11
 
@@ -11,7 +11,7 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
 
 - Les getters et fonctions addVoter et addProposal ne peuvent pas etre testé séparement, alors vérifier addVoter consiste a verifier aussi getVoter, de même avec addProposal et getOneProposal.
 
-## Ordre du fichier
+## - Ordre du fichier
 
 ### 1- Test des fonction d'etat (state)
 
@@ -51,7 +51,7 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
     si la fonction tallyVote fait bien gagner la premierere proposition en cas d'égalité avec une autre.
     
     
- ## Pourcentage du contrat couvert: 
+ ## - Pourcentage du contrat couvert: 
  
  Malheureusement avec le probleme de solidity coverage cette section ne peut pas être remplie
 
