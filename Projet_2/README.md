@@ -1,5 +1,5 @@
 # Test du Voting
-Le fichier voting.test.js est le fichier test de la correction du contrat de vote.
+Le fichier voting.test.js est le fichier de test de la correction du contrat de vote.
 
 ## Infos
 
