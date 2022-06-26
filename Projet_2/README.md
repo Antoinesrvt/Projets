@@ -4,10 +4,9 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
 ## Infos
 
 ### Nombre de test effectués : 11
-### - Pourcentage du contrat couvert: 
- Malheureusement avec le probleme de solidity coverage cette section ne peut pas être remplie
 
 
+- Pas de pourcentage du contrat couvert a cause du probleme avec solidity coverage
 
 - Je n'ai pas vérifié les autres fonctions d'état du workflowStatus car cela reste du copié collé du premier test. Si le premier marche, alors les autres marcheront aussi.
 
@@ -56,4 +55,4 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
     
 
 
-[^1]: Fait par Antoine Servant
+> Fait par Antoine Servant
