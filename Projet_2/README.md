@@ -7,11 +7,8 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
 
 
 - Pas de pourcentage du contrat couvert a cause du probleme avec solidity coverage.
-
 - Je n'ai pas vérifié les autres fonctions d'état du workflowStatus car cela reste du copié collé du premier test. Si le premier marche, alors les autres marcheront aussi.
-
 - Les revert pour cause de states (comme le deuxieme revert de addProposal) n'a été testé qu'une fois, pour la meme raison que les fonctions d'état du workflowStatus.
-
 - Les getters et fonctions addVoter et addProposal ne peuvent pas etre testé séparement, alors vérifier addVoter consiste a verifier aussi getVoter, de même avec addProposal et getOneProposal.
 
 ## Ordre du fichier
