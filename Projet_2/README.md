@@ -42,7 +42,7 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
  
  
 ### 5- Test de la fonction tallyVote
-  Bien que tallyVote sois dans le group de fonction d'etat, celle ci a besoin d'une catégorie a part:
+  ##### Bien que tallyVote sois dans le group de fonction d'etat, celle ci a besoin d'une catégorie a part:
   #### J'ai testé:
   
     si la fonction tallyVote fait bien gagner la proposition qui a le plus de vote
