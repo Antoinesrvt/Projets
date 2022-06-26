@@ -3,6 +3,8 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
 
 ## Infos
 
+### Nombre de test effectués : 11
+
 - Je n'ai pas vérifié les autres fonctions d'état du workflowStatus car cela reste du copié collé du premier test. Si le premier marche, alors les autres marcheront aussi.
 
 - Les revert pour cause de states (comme le deuxieme revert de addProposal) n'a été testé qu'une fois, pour la meme raison que les fonctions d'état du workflowStatus.
