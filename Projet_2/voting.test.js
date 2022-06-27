@@ -110,7 +110,7 @@ contract('Voting', accounts => {
         //objectif de la fonction n°1
         it("should set a vote", async () =>{
             await VotingInstance.setVote(0, {from:owner});
-            const storedData = await awaiVotingInstance.getOneProposal(0);
+            const storedData = await VotingInstance.getOneProposal(0);
             expect(await new BN(storedData.voteCount)).to.be.bignumber.equal(new BN(1));
         })
         
