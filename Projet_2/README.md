@@ -3,7 +3,7 @@ Le fichier voting.test.js est le fichier de test de la correction du contrat de 
 
 ## Infos
 
-### Nombre de test effectués : 11
+### Nombre de test effectués : 14
 
 
 - Pas de pourcentage du contrat couvert a cause du probleme avec solidity coverage.
